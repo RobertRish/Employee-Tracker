@@ -1,6 +1,6 @@
 {
-  "name": "Employee Tracker",
-  "main": "app.js"
+  "name": "employee-tracker",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
