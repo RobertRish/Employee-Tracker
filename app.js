@@ -1,10 +1,11 @@
 const inquirer = require('inquirer');
+const cTable = require('console.table');
 
 const userQuery = () => {
     return inquirer.prompt([
       {
         type: 'list',
-        name: 'opening question',
+        name: 'opener',
         message: 'What would you like to do?',
         choices: ["view all departments", 
                   "view all roles", 
@@ -14,6 +15,13 @@ const userQuery = () => {
                   "add an employee", 
                   "update an employee role"]
       },
+      then(answers => {
+        if (answers.opener === "view all departments" ) {
+            console.table([
+                
+              ]);
+        }
+      
     ]);
   };
 
