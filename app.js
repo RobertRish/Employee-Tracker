@@ -17,16 +17,16 @@ const userQuery = () => {
                   "add an employee", 
                   "update an employee role"
                  ]
-      }])
-      .then(answers => {
-        if (answers.opener === "view all departments" ) {
-            db.query("SELECT * FROM departments")
-                .then((data) => {
-                  console.table(data);
-                });
-        }
-      });
-    };
+        }])
+            .then(answers => {
+                if (answers.opener === "view all departments") {
+                    db.query("SELECT * FROM departments")
+                        .then((data) => {
+                        console.table(data);
+                        });
+                    }
+            });
+        };
 
 userQuery();
 
