@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
-const mysql = require("mysql2");
+const mysql = require("mysql2/promise");
 const db = require("./db/connection.js");
 const cTable = require('console.table');
 
-db.query("source db.sql");
-db.query("source schema.sql");
+// db.query("source db.sql");
+// db.query("source schema.sql");
 
 const userQuery = () => {
     return inquirer.prompt([
