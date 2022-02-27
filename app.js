@@ -1,4 +1,5 @@
 const inquirer = require('inquirer');
+const db = require("./db/connection");
 const cTable = require('console.table');
 
 const userQuery = () => {
@@ -18,7 +19,7 @@ const userQuery = () => {
       then(answers => {
         if (answers.opener === "view all departments" ) {
             console.table([
-                
+                db.query("SELECT * FROM department");
               ]);
         }
       
