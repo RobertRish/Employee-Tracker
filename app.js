@@ -18,9 +18,10 @@ const userQuery = () => {
       },
       then(answers => {
         if (answers.opener === "view all departments" ) {
-            console.table([
-                db.query("SELECT * FROM department");
-              ]);
+            db.query("select * from departments")
+                .then((data) => {
+                  console.table(data);
+                });
         }
       
     ]);
