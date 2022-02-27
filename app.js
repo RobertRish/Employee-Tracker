@@ -1,12 +1,10 @@
 const inquirer = require('inquirer');
+const mysql = require("mysql2");
 const db = require("./db/connection.js");
 const cTable = require('console.table');
 
-// run:
-//   mysql -u root -p
-//   source db.sql
-//   source schema.sql
-//   quit mysql shell
+db.query("source db.sql");
+db.query("source schema.sql");
 
 const userQuery = () => {
     return inquirer.prompt([
@@ -39,7 +37,12 @@ const userQuery = () => {
                     db.query("SELECT * FROM employees")
                     .then((data) => {
                     console.table(data);
-                    });
+                        });
+                    };
+            });
+    };
+            
+        
 
 userQuery();
 
