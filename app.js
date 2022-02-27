@@ -2,6 +2,12 @@ const inquirer = require('inquirer');
 const db = require("./db/connection.js");
 const cTable = require('console.table');
 
+// run:
+//   mysql -u root -p
+//   source db.sql
+//   source schema.sql
+//   quit mysql shell
+
 const userQuery = () => {
     return inquirer.prompt([
       {
@@ -24,9 +30,16 @@ const userQuery = () => {
                         .then((data) => {
                         console.table(data);
                         });
-                    }
-            });
-        };
+                } else if (answers.opener === "view all roles") {
+                    db.query("SELECT * FROM roles")
+                    .then((data) => {
+                    console.table(data);
+                    });
+                } else if (answers.opener === "view all employees") {
+                    db.query("SELECT * FROM employees")
+                    .then((data) => {
+                    console.table(data);
+                    });
 
 userQuery();
 
@@ -35,4 +48,4 @@ userQuery();
   // 3. Figure out how to put user inputs into db
   // 4. Figure out how to display them with console.table
   // 5. Figure out how to take screen capture
-  // 6. Figure out how to input video into README
+  // 6. Figure out how to input video into readme 
