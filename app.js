@@ -24,10 +24,11 @@ const userQuery = () => {
         }])
             .then(answers => {
                 if (answers.opener === "view all departments") {
-                    db.query("SELECT * FROM departments")
-                        .then((data) => {
-                        console.table(data);
-                        });
+                    // below is what askbcs had me alter.  look at .query() in docs
+                    db.query("SELECT * FROM department", function (err, result, fields) {
+                        console.log(result);
+                        // console.table(result);
+                    })
                 } else if (answers.opener === "view all roles") {
                     db.query("SELECT * FROM roles")
                     .then((data) => {
