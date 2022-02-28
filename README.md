@@ -1,3 +1,3 @@
 # Employee-Tracker
 
-![SQL Walkthrough GIF](walkthrough.gif)
+![SQL Walkthrough GIF](Walkthrough.gif)
