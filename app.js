@@ -26,20 +26,29 @@ const userQuery = () => {
                 if (answers.opener === "view all departments") {
                     // below is what askbcs had me alter.  look at .query() in docs
                     db.query("SELECT * FROM department", function (err, result, fields) {
-                        console.log(result);
-                        // console.table(result);
-                    })
+                        console.table(result);
+                    });
                 } else if (answers.opener === "view all roles") {
-                    db.query("SELECT * FROM roles")
-                    .then((data) => {
-                    console.table(data);
+                    db.query("SELECT * FROM roles", function (err, result, fields) {
+                        console.table(result);
                     });
                 } else if (answers.opener === "view all employees") {
-                    db.query("SELECT * FROM employees")
-                    .then((data) => {
-                    console.table(data);
+                    db.query("SELECT * FROM employee", function (err, result, fields) {
+                        console.table(result);
                         });
-                    };
+                } else if (answers.opener === "add a department") {
+                    db.query("SELECT * FROM employee", function (err, result, fields) {
+                        console.table(result);
+                        });
+                } else if (answers.opener === "add a role") {
+                    db.query("SELECT * FROM employee", function (err, result, fields) {
+                        console.table(result);
+                        });
+                } else if (answers.opener === "update an employee role") {
+                    db.query("SELECT * FROM employee", function (err, result, fields) {
+                        console.table(result);
+                        });
+                }  
             });
     };
             

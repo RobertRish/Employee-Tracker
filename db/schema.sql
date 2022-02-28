@@ -22,3 +22,9 @@ CREATE TABLE employee (
     role_id INT,
     manager_id INT DEFAULT null
 );
+
+INSERT INTO department (name)
+VALUES
+  ('Human Resources'),
+  ('Accounting');
+
