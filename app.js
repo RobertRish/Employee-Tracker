@@ -24,22 +24,21 @@ const userQuery = () => {
         }])
             .then(answers => {
                 if (answers.opener === "view all departments") {
-                    // below is what askbcs had me alter.  look at .query() in docs
-                    db.query("SELECT * FROM department", function (err, result, fields) {
-                        console.table(result);
-                    });
+                    viewDepartments();
                 } else if (answers.opener === "view all roles") {
                     db.query("SELECT * FROM roles", function (err, result, fields) {
                         console.table(result);
                     });
                 } else if (answers.opener === "view all employees") {
-                    db.query("SELECT * FROM employee", function (err, result, fields) {
-                        console.table(result);
-                        });
+                    // db.query("SELECT * FROM employee", function (err, result, fields) {
+                    //     console.table(result);
+                    //     });
+                    viewEmployees();
                 } else if (answers.opener === "add a department") {
-                    db.query("SELECT * FROM employee", function (err, result, fields) {
-                        console.table(result);
-                        });
+                    // db.query("SELECT * FROM employee", function (err, result, fields) {
+                    //     console.table(result);
+                    //     });
+                    addDepartment();
                 } else if (answers.opener === "add a role") {
                     db.query("SELECT * FROM employee", function (err, result, fields) {
                         console.table(result);
@@ -52,7 +51,31 @@ const userQuery = () => {
             });
     };
             
-        
+      function viewDepartments() {
+        db.query("SELECT * FROM department", function (err, result, fields) {
+            console.table(result);
+            userQuery();
+        });
+      }  
+
+      function viewEmployees() {
+        db.query("SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS name FROM employee", function (err, result, fields) {
+            console.table(result);
+            userQuery();
+        });
+      } 
+
+      function addDepartment() {
+          inquirer.prompt({
+              type: "input",
+              name: "deptName",
+              message: "What is the name of the department you'd like to add?"
+          }).then(answers => {
+              db.query("INSERT INTO department SET ?", {name: answers.deptName}, function (err, result, fields) {
+                  viewDepartments();
+              })
+          })
+      }
 
 userQuery();
 

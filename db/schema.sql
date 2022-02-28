@@ -1,18 +1,18 @@
+DROP DATABASE IF EXISTS employee_tracker;
+CREATE DATABASE employee_tracker;
 USE employee_tracker;
-DROP TABLE IF EXISTS department;
-DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS employee;
 
 CREATE TABLE department (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30)
+    deptName VARCHAR(30)
 );
 
 CREATE TABLE roles (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
-    title  VARCHAR(30),
+    title VARCHAR(30),
     salary DECIMAL,
-    department_id INT 
+    department_id INT,
+    FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE 
 );
 
 CREATE TABLE employee (
@@ -20,11 +20,9 @@ CREATE TABLE employee (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     role_id INT,
-    manager_id INT DEFAULT null
+    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    manager_id INT DEFAULT null,
+    -- tutor said this line was a problem FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
 
-INSERT INTO department (name)
-VALUES
-  ('Human Resources'),
-  ('Accounting');
 
