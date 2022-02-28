@@ -56,9 +56,11 @@ const userQuery = () => {
 
 userQuery();
 
-  // 1. Figure out package.json file
-  // 2. Figure out inquirer.js prompts
-  // 3. Figure out how to put user inputs into db
-  // 4. Figure out how to display them with console.table
-  // 5. Figure out how to take screen capture
-  // 6. Figure out how to input video into readme 
+
+  
+  // 1. Figure out inquirer.js prompts 
+  //    to return to opener after any action is taken
+  // 2. Make sure tables are created correctly
+  // 2. Figure out how to put user inputs into db
+  // 3. Figure out how to JOIN tables in schema.sql https://www.w3schools.com/sql/sql_join.asp
+  // 4. Redo walkthrough GIF
