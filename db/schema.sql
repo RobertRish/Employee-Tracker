@@ -12,7 +12,7 @@ CREATE TABLE roles (
     title VARCHAR(30),
     salary DECIMAL,
     department_id INT,
-    FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE 
+    FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 CREATE TABLE employee (
@@ -20,9 +20,10 @@ CREATE TABLE employee (
     first_name VARCHAR(30),
     last_name VARCHAR(30),
     role_id INT,
-    FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES roles(id), 
     manager_id INT DEFAULT null,
-    -- tutor said this line was a problem FOREIGN KEY (manager_id) REFERENCES employee(id)
+    FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
 
 
+/*tutor said this line was a problem (line 24 manager_id FOREIGN KEY (manager_id) REFERENCES employee(id)*/

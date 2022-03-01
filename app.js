@@ -26,23 +26,13 @@ const userQuery = () => {
                 if (answers.opener === "view all departments") {
                     viewDepartments();
                 } else if (answers.opener === "view all roles") {
-                    db.query("SELECT * FROM roles", function (err, result, fields) {
-                        console.table(result);
-                    });
+                    viewRoles();
                 } else if (answers.opener === "view all employees") {
-                    // db.query("SELECT * FROM employee", function (err, result, fields) {
-                    //     console.table(result);
-                    //     });
                     viewEmployees();
                 } else if (answers.opener === "add a department") {
-                    // db.query("SELECT * FROM employee", function (err, result, fields) {
-                    //     console.table(result);
-                    //     });
                     addDepartment();
                 } else if (answers.opener === "add a role") {
-                    db.query("SELECT * FROM employee", function (err, result, fields) {
-                        console.table(result);
-                        });
+                    addRole();
                 } else if (answers.opener === "update an employee role") {
                     db.query("SELECT * FROM employee", function (err, result, fields) {
                         console.table(result);
@@ -57,6 +47,13 @@ const userQuery = () => {
             userQuery();
         });
       }  
+
+      function viewRoles() {
+        db.query("SELECT * FROM roles", function (err, result, fields) {
+            console.table(result);
+            userQuery();
+        });
+      } 
 
       function viewEmployees() {
         db.query("SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS name FROM employee", function (err, result, fields) {
@@ -73,9 +70,24 @@ const userQuery = () => {
           }).then(answers => {
               db.query("INSERT INTO department SET ?", {name: answers.deptName}, function (err, result, fields) {
                   viewDepartments();
+                  userQuery();
               })
           })
       }
+
+      function addRole() {
+        inquirer.prompt({
+            type: "input",
+            name: "roleName",
+            message: "What is the name of the role you'd like to add?"
+        }).then(answers => {
+            db.query("INSERT INTO roles SET ?", {name: answers.roleName}, function (err, result, fields) {
+                viewRoles();
+            })
+        })
+    }
+
+
 
 userQuery();
 
