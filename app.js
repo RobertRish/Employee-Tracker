@@ -67,7 +67,7 @@ const userQuery = () => {
                 message: "What is the name of the department you'd like to add?"
                 }])
                     .then(answers => {
-                            db.query("INSERT INTO department (department_name) VALUE (?);", [answers.deptName],  function (err, result, fields) {
+                            db.query("INSERT INTO department (deptName) VALUE (?);", [answers.deptName],  function (err, result, fields) {
                             viewDepartments();
                             userQuery();
                         })
@@ -93,19 +93,32 @@ const userQuery = () => {
             },
         ])
             .then(answers => {
-            db.query("INSERT INTO roles VALUE (?)", {name: answers.roleName}, function (err, result, fields) {
+            db.query("INSERT INTO roles VALUES (?,?,?)", [answers.roleName], function (err, result, fields) {
                 viewRoles();
             })
         })
     }
 
     function addEmployee() {
-        inquirer.prompt({
-            type: "input",
-            name: "employeeName",
-            message: "What is the name of the role you'd like to add?"
-        }).then(answers => {
-            db.query("INSERT INTO roles SET ?", {name: answers.roleName}, function (err, result, fields) {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "first_name",
+                message: "What is the name of the role you'd like to add?"
+            },
+            {
+                name: "last_name",
+                type: "input",
+                message: "What is the compensation for this position? (Do not include '$'",
+            },
+            {
+                type: "input",
+                name: "roleName",
+                message: "To which department does this position belong?"
+            },
+        ])
+            .then(answers => {
+            db.query("INSERT INTO roles VALUES (?,?,?)", {name: answers.roleName}, function (err, result, fields) {
                 viewRoles();
             })
         })
