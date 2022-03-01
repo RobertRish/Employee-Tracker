@@ -68,7 +68,7 @@ const userQuery = () => {
               name: "deptName",
               message: "What is the name of the department you'd like to add?"
           }).then(answers => {
-              db.query("INSERT INTO department SET ?", {name: answers.deptName}, function (err, result, fields) {
+                  db.query("INSERT INTO department (department_name) VALUE ?;", [answers.deptName],  function (err, result, fields) {
                   viewDepartments();
                   userQuery();
               })
@@ -79,6 +79,18 @@ const userQuery = () => {
         inquirer.prompt({
             type: "input",
             name: "roleName",
+            message: "What is the name of the role you'd like to add?"
+        }).then(answers => {
+            db.query("INSERT INTO roles SET ?", {name: answers.roleName}, function (err, result, fields) {
+                viewRoles();
+            })
+        })
+    }
+
+    function addEmployee() {
+        inquirer.prompt({
+            type: "input",
+            name: "employeeName",
             message: "What is the name of the role you'd like to add?"
         }).then(answers => {
             db.query("INSERT INTO roles SET ?", {name: answers.roleName}, function (err, result, fields) {
