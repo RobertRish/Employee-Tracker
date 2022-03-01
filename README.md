@@ -1,3 +1,5 @@
 # Employee-Tracker
 
-![SQL Walkthrough GIF](Walkthrough.mp4)
+![SQL Walkthrough GIF](Walkthrough_AdobeCreativeCloudExpress.gif)
+
+https://youtu.be/kHLA-adLIic
