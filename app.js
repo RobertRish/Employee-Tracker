@@ -71,7 +71,6 @@ const userQuery = () => {
                     .then(answers => {
                             db.query("INSERT INTO department (deptName) VALUE (?);", [answers.deptName],  function (err, result, fields) {
                             viewDepartments();
-                            userQuery();
                         })
                     })
       };
