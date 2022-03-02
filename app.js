@@ -96,7 +96,6 @@ const userQuery = () => {
             .then(answers => {
             db.query("INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)", [answers.roleName, answers.salary, answers.deptID], function (err, result, fields) {
                 viewRoles();
-                userQuery();
             })
 
         })
@@ -127,9 +126,8 @@ const userQuery = () => {
             },
         ])
             .then(answers => {
-            db.query("INSERT INTO employee VALUES (?,?,?,?)", [answers.first_name, answers.last_name, answers.roleId, answers.manager_id], function (err, result, fields) {
+            db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)", [answers.first_name, answers.last_name, answers.roleId, answers.manager_id], function (err, result, fields) {
                 viewEmployees();
-                userQuery();
             })
         })
     };

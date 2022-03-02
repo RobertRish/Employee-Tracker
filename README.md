@@ -1,7 +1,5 @@
 # Employee-Tracker
 
-![SQL Walkthrough GIF](Walkthrough_AdobeCreativeCloudExpress.gif)
-
-https://youtu.be/kHLA-adLIic
+https://youtu.be/uYGOlPzDDkc
 
 A CLI app to manage a company database
