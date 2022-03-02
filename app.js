@@ -30,6 +30,8 @@ const userQuery = () => {
                     addDepartment();
                 } else if (answers.opener === "add a role") {
                     addRole();
+                } else if (answers.opener === "add an employee") {
+                    addEmployee();
                 } else if (answers.opener === "update an employee role") {
                     db.query("SELECT * FROM employee", function (err, result, fields) {
                         console.table(result);
@@ -53,7 +55,7 @@ const userQuery = () => {
       } 
 
       function viewEmployees() {
-        db.query("SELECT CONCAT(employee.first_name, ' ', employee.last_name) AS name FROM employee", function (err, result, fields) {
+        db.query("SELECT * FROM employee", function (err, result, fields) {
             console.table(result);
             userQuery();
         });
@@ -84,26 +86,22 @@ const userQuery = () => {
             {
                 name: "salary",
                 type: "number",
-                message: "What is the compensation for this position? (Do not include '$'",
+                message: "What is the compensation for this position? (Do not include '$'"
             },
             {
                 type: "input",
-                name: "deptName",
-                message: "To which department does this position belong?"
+                name: "deptID",
+                message: "To which department does this position belong?  Please provide the numerical department id from the department table."
             },
         ])
             .then(answers => {
-            db.query("INSERT INTO roles (title, salary) VALUES (?,?)", [answers.roleName, answers.salary], function (err, result, fields) {
-                
+            db.query("INSERT INTO roles (title, salary, department_id) VALUES (?,?,?)", [answers.roleName, answers.salary, answers.deptID], function (err, result, fields) {
+                viewRoles();
+                userQuery();
             })
 
         })
-            .then(answers => {
-                db.query("INSERT (deparment_id) INTO roles (department_id) WHERE ? === (department.deptName)", [answers.deptName], function (err, result, fields){
-                    viewRoles();
-                    userQuery();
-                })
-            })
+            
     }
 
     function addEmployee() {
@@ -111,25 +109,64 @@ const userQuery = () => {
             {
                 type: "input",
                 name: "first_name",
-                message: "What is the name of the role you'd like to add?"
+                message: "What is the employee's first name?"
             },
             {
                 name: "last_name",
                 type: "input",
-                message: "What is the compensation for this position? (Do not include '$'",
+                message: "What is the employee's last name?",
             },
             {
-                type: "input",
-                name: "roleName",
-                message: "To which department does this position belong?"
+                type: "number",
+                name: "roleId",
+                message: "What role will this employee fill? Please provide the role ID from the roles table."
+            },
+            {
+                name: "manager_id",
+                type: "number",
+                message: "Who is this employee's manager?  Please provide the employee ID of the manager from the employee table",
             },
         ])
             .then(answers => {
-            db.query("INSERT INTO roles VALUES (?,?,?)", {name: answers.roleName}, function (err, result, fields) {
-                viewRoles();
+            db.query("INSERT INTO employee VALUES (?,?,?,?)", [answers.first_name, answers.last_name, answers.roleId, answers.manager_id], function (err, result, fields) {
+                viewEmployees();
+                userQuery();
             })
         })
-    }
+    };
+
+    function updateEmployee() {
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "first_name",
+                message: "What is the employee's first name?"
+            },
+            {
+                name: "last_name",
+                type: "input",
+                message: "What is the employee's last name?",
+            },
+            {
+                type: "number",
+                name: "roleId",
+                message: "What role will this employee fill? Please provide the role ID from the roles table."
+            },
+            {
+                name: "manager_id",
+                type: "number",
+                message: "Who is this employee's manager?  Please provide the employee ID of the manager from the employee table",
+            },
+        ])
+            .then(answers => {
+            db.query("INSERT INTO roles VALUES (?,?,?,?)", [answers.first_name, answers.last_name, answers.roleId, answers.manager_id], function (err, result, fields) {
+                viewEmployees();
+                userQuery();
+            })
+        })
+    };
+
+
 
 
 
