@@ -144,7 +144,7 @@ const userQuery = () => {
             },
         ])
             .then(answers => {
-            db.query("UPDATE employee SET role_id = (?) WHERE employee_id = (?)", [answers.role_id, answers.employee_id], function (err, result, fields) {
+            db.query("UPDATE employee SET role_id = (?) WHERE id = (?)", [answers.role_id, answers.employee_id], function (err, result, fields) {
                 viewEmployees();
             })
         })
