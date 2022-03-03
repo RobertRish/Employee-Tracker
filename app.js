@@ -135,30 +135,19 @@ const userQuery = () => {
     function updateEmployee() {
         inquirer.prompt([
             {
-                type: "input",
-                name: "first_name",
-                message: "What is the employee's first name?"
-            },
-            {
-                name: "last_name",
-                type: "input",
-                message: "What is the employee's last name?",
+                type: "number",
+                name: "role_id",
+                message: "What is the role id # for the new role to you would like this employee to have?"
             },
             {
                 type: "number",
-                name: "roleId",
-                message: "What role will this employee fill? Please provide the role ID from the roles table."
-            },
-            {
-                name: "manager_id",
-                type: "number",
-                message: "Who is this employee's manager?  Please provide the employee ID of the manager from the employee table",
+                name: "employee_id",
+                message: "What is the employee's employee id?"
             },
         ])
             .then(answers => {
-            db.query("INSERT INTO roles VALUES (?,?,?,?)", [answers.first_name, answers.last_name, answers.roleId, answers.manager_id], function (err, result, fields) {
+            db.query("UPDATE employee SET role_id = (?) WHERE employee_id = (?)", [answers.role_id, answers.employee_id], function (err, result, fields) {
                 viewEmployees();
-                userQuery();
             })
         })
     };
