@@ -33,9 +33,7 @@ const userQuery = () => {
                 } else if (answers.opener === "add an employee") {
                     addEmployee();
                 } else if (answers.opener === "update an employee role") {
-                    db.query("SELECT * FROM employee", function (err, result, fields) {
-                        console.table(result);
-                        });
+                    updateEmployee();
                 }  
             });
     };
