@@ -157,10 +157,3 @@ const userQuery = () => {
 userQuery();
 
 
-  
-  // 1. Figure out inquirer.js prompts 
-  //    to return to opener after any action is taken
-  // 2. Make sure tables are created correctly
-  // 2. Figure out how to put user inputs into db
-  // 3. Figure out how to JOIN tables in schema.sql https://www.w3schools.com/sql/sql_join.asp
-  // 4. Redo walkthrough GIF
