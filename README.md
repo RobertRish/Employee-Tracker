@@ -1,5 +1,9 @@
 # Employee-Tracker
 
+## Technologies Used
+
+Node, Inquirer.js, SQL, mySQL
+
 
 https://youtu.be/9nrdryTMFgQ
 
